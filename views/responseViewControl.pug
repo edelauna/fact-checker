@@ -1,0 +1,29 @@
+if output
+  - var image = ''
+  - var analysis =''
+  - var conf = output.confidence 
+  case (true)
+    when (conf > 66)
+      - image = 'pos'
+      - analysis = 'Information'
+    when (conf > 55)
+      - image = 'neutral+'
+      - analysis = 'Mix of Information and Misinformation: Mostly Information'
+    when (conf > 44)
+      - image = 'neutral'
+      - analysis = 'Mix of Information and Misinformation'
+    when (conf > 33)
+      - image = 'neutral-'
+      - analysis = 'Mix of some Information and some Misinformation: Mostly Misinformation'
+    when (conf > 0)
+      - image = 'neg'
+      - analysis = 'Misinformation'
+    default
+      - image = 'none'
+      - analysis = 'No Claims Found'
+  div.card(style='width:18rem;')
+    img.card-img-top(src='/images/'+image+'.png')
+  div.card-body
+    h5.card-title #{analysis}
+    h6.card-subtitle.mb-2.text-muted Claims Made: #{output.claims}
+    p.card-text.d-none Fact Checking: #{output.confidence}% Confidence with #{output.errorMargin}% margin of error.

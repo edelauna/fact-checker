@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  div#accordion
+    div.card
+      div#headingOne.card-header
+        h5.mb-0
+          button.btn.btn-link(data-toggle='collapse' data-target='#collapseOne' aria-expanded=(undefined===output? 'true' : 'flase') aria-controls='collapseOne') Input
+    div#collapseOne.collapse(aria-labelledby='headingOne' data-parent='#accordion' class=(undefined===output? 'show' : ''))
+      div.card-body
+        form(method='POST' action="")
+          div.form-group
+            label(for="input") Input Text:
+            textarea#input.form-control(type='textarea' maxlength='6000' placeholder='Some Text' rows='10' name='input')=(undefined===input? '' : input.data)
+          button.btn.btn-primary(type='submit') Submit
+    block response

@@ -1,0 +1,14 @@
+extends index
+  
+block response
+  div.card(style='width:18rem')
+    div.card-header#headingTwo
+      h5.mb-0
+        button.btn.btn-link.collapsed(data-toggle='collapse' data-target='#collapseTwo' aria-expanded='true' aria-controls='collapseTwo') Results
+  div#collapseTwo.collapse.show(aria-labelledby='headingTwo' data-parent='#accordion')
+    div.card-body
+      include responseViewControl
+      if errors
+        ul
+          for error in errors
+            li!= error.msg
